@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  django_blog:
+    container_name: blog_container
+    build: ./django_blog
+    command: bash -c "python manage.py makemigrations &&
+                      python manage.py migrate &&
+                      python manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - ./django_blog/:/app
+    ports:
+      - 8000:8000
+    env_file:
+      - .env.dev
+    depends_on:
+      - db
+
+  db:
+    container_name: blogdbcontainer
+    image: postgres:13
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    env_file:
+      - .env.dev
+
+volumes:
+  postgres_data:
