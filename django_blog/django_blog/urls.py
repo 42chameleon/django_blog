@@ -24,7 +24,8 @@ router.register(r'post', views.CreatePost, basename='createpost')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path(r'^api/', include(router.urls))
+    path(r'^api/', include(router.urls)),
+    path('comment/', views.CommentCreateViewSet.as_view({'post': 'create'}))
 ]
 
 urlpatterns += router.urls
