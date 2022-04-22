@@ -15,7 +15,7 @@ class Post(models.Model):
 
 class Comment(models.Model):
     text = models.TextField()
-    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="comments")
     parent = models.ForeignKey('self', on_delete=models.SET_NULL,
                                blank=True, null=True,
                                related_name='children')
